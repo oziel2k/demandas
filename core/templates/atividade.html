@@ -1,0 +1,62 @@
+
+{% extends "model-mail.html" %}
+
+{% block content  %} 
+
+    <div class="container">
+        <h4 class="text-center">{{mensagem|safe}}</h4>
+            <div class="container">
+
+                {% if not andamento%}
+                    <ul class="list-group my-4 mx-2">
+                        <li class="list-group-item list-group-item-light text-center"><b>Dados da Demanda</b></li>
+                    </ul>         
+                {% else %}
+
+                    <ul class="list-group my-4 mx-2">
+                        <li class="list-group-item list-group-item-light"><b>Tipo do andamento:</b> {{ andamento.tipo }}</li>
+                        <li class="list-group-item list-group-item-light"><b>Descrição:</b> {{ andamento.descricao|safe }}</li>
+
+                        {% if andamento.tipo.id == 4 and andamento.tipo_hora.id == 4 %}
+                            <li class="list-group-item list-group-item-light"><b>Respostas rápidas:</b></li>                            
+                            <li class="list-group-item list-group-item-light">
+                                <a href="https://demandas.oziel.dev.br/demandas/acoes/retornarandamento/aprovado/{{andamento.id}}">                                        
+                                    <button type="button" class="btn btn-link">Aprovar</button>
+                                </a>                                 
+                            </li>
+
+                            <li class="list-group-item list-group-item-light">
+                                <a href="https://demandas.oziel.dev.br/demandas/acoes/retornarandamento/rejeitado/{{andamento.id}}">                                        
+                                    <button type="button" class="btn btn-link">Rejeitar</button>
+                                </a>                                 
+                            </li>
+                            <li class="list-group-item list-group-item-light">
+                                <a href="https://demandas.oziel.dev.br/demandas/acoes/retornarandamento/analise/{{andamento.id}}">                                        
+                                    <button type="button" class="btn btn-link">Em Análise</button>
+                                </a>                                 
+                            </li>
+                        {% endif %}
+
+                    </ul> 
+
+                {% endif %}   
+        </div>
+
+        <ul class="list-group my-4 mx-2">
+            <li class="list-group-item list-group-item-light"><b>Id da demanda:</b> {{ demanda.id }}</li>
+            <li class="list-group-item list-group-item-light"><b>Assunto:</b> {{ demanda.assunto }}</li>
+            <li class="list-group-item list-group-item-light"><b>Tipo:</b> {{ demanda.tipo }}</li>
+            <li class="list-group-item list-group-item-light"><b>Setor:</b> {{ demanda.setor }}</li>
+            <li class="list-group-item list-group-item-light"><b>Descrição:</b> {{ demanda.descricao }}</li>
+            <li class="list-group-item list-group-item-light">
+                <a href="https://demandas.oziel.dev.br/demandas/demanda/{{demanda.id}}">                                        
+                    <button type="button" class="btn btn-link">Ir para a Demanda</button>
+                </a>                              
+            </li>
+        </ul>
+
+    <div class="container">
+
+    
+
+{% endblock %}

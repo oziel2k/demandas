@@ -1,0 +1,211 @@
+a:link { text-decoration: none; }
+a:visited { text-decoration: none; }
+a:hover { text-decoration: none; }
+a:active { text-decoration: none; }
+
+
+.botaounico
+{
+	  width:150px; 
+    max-width:200px; 
+    min-width: 100px;    
+    display:block; 
+    text-align:center;
+    transition:background .3s;    
+    margin:auto;  
+}
+
+.inputlabel
+{
+  min-width: 160px;
+  max-width: 160px;
+  font-weight: bold;
+}
+
+.navbar-brand-logo
+{
+  width: 22px; 
+  height: auto;
+}
+
+.myfooter
+{
+  background-color: rgba(0, 0, 0, 0.7);
+  color:#FAFAFA;
+  max-height: 40px;
+  max-width: 100%;
+
+}
+
+.txthora
+{
+  max-width: 100px;
+}
+.acdediv
+{
+  color: #8a6b24; 
+  display: block; 
+  font-size: 18px;
+  font-weight: bold;  
+  font-style: italic;
+
+}
+.custom-select
+{
+  min-width: 100%;
+  max-width: 100%;   
+}
+
+.gestor_btn
+{
+    min-width: 300px;
+    max-width: 300px;    
+}
+
+.follow_btn 
+{
+  min-width: 160px;
+  max-width: 160px;
+
+}
+
+.enviar_btn 
+{
+    min-width: 220px;
+    max-width: 220px;    
+}    
+.greyi
+{
+  color:#777777;
+}    
+
+.folow_div
+{
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 5px;
+  padding-left: 0px;      
+}
+
+footer 
+{
+        position: fixed;
+        bottom: 0px;
+        width: 100%;
+}
+
+.navmenu
+{
+    font-weight: bold;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}     
+.navitemmenu
+{
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.horapacote
+{
+  color:#000066; 
+}
+
+.horaorcamento
+{
+  color:#660066; 
+}
+
+.horacortesia
+{
+  color:#009900; 
+}
+.horabase
+{
+  color:#225500; 
+}
+
+.horaprevisao
+{
+  color:#005555; 
+}
+
+/*  Custom table mini device  */
+
+table 
+{ 
+    width: 750px; 
+    border-collapse: collapse; 
+    margin:20px auto;
+}
+
+td, th 
+{ 
+    padding: 10px; 
+    text-align: left; 
+    font-size: 18px;
+}
+
+/* 
+Max width before this PARTICULAR table gets nasty
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media 
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  
+{
+
+    table 
+    { 
+        width: 100%; 
+    }
+
+    /* Force table to not be like tables anymore */
+    table, thead, tbody, th, td, tr 
+    { 
+      display: block; 
+    }
+
+    /* Hide table headers (but not display: none;, for accessibility) */
+    thead tr 
+    { 
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+
+    tr { border: 1px solid #ccccdd; }
+
+    td 
+    { 
+      /* Behave  like a "row" */
+      border: none;
+      border-bottom: 1px solid #eee; 
+      position: relative;
+      padding-left: 50%; 
+    }
+
+    td:before 
+    { 
+      /* Now like a table header */
+      position: absolute;
+      /* Top/left values mimic padding */
+      top: 6px;
+      left: 6px;
+      width: 45%; 
+      padding-right: 10px; 
+      white-space: nowrap;
+      /* Label the data */
+      content: attr(data-column);
+
+      color: #222299;
+      font-weight: bold;
+    }
+
+}
+
+/* Final do bloco para minidevice */
+
+/*
+{% block style %} {% endblock %} */

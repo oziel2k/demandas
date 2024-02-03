@@ -1,0 +1,30 @@
+
+{% extends "model-page.html" %}
+    
+{% block content  %} 
+
+    <div class="container text-center"><br>
+
+        <a class="dropdown-item" href="/gestor/pacote">
+            <button type="button" class="btn btn-primary btn-lg btn-block gestor_btn">Consumo Horas do Pacote</button>
+        </a>
+        
+        <a class="dropdown-item" href="/gestor/pacote/listagem">
+            <button type="button" class="btn btn-secondary btn-lg btn-block gestor_btn">Listagem Horas do Pacote</button>
+        </a>
+        
+        <a class="dropdown-item" href="#">
+            <button type="button" class="btn btn-success btn-lg btn-block gestor_btn">*Reservado*</button>
+        </a>
+
+        <a class="dropdown-item" href="#">
+            <button type="button" class="btn btn-primary btn-lg btn-block gestor_btn">*Reservado*</button>        
+        </a>
+
+        <a class="dropdown-item" href="#">
+            <button type="button" class="btn btn-secondary btn-lg btn-block gestor_btn">*Reservado*</button>
+        </a> 
+        
+    </div>
+
+{% endblock %}

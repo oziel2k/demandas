@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %} Login Demandas {% endblock %}
+
+{% block content %}
+
+    <div class="container text-center">
+        <br><br>
+
+        <h4 class="mt-2 mb-2">Informe suas credenciais para fazer Login</h4>        
+        <div class="container">
+            <form method="post">
+                {% csrf_token %}
+                
+                <div class="container">
+                    {{ form|crispy }}
+                </div>
+                <div class="container">
+                    <button class="btn login_btn btn-success mt-3" type="submit">Entrar</button>
+                </div>
+                <br><br><br><br><br>
+                <p>Caso você é cliente e aínda não tem as credenciais para acesso,solicite já enviando um e-mail para oziel2k@outlook.com.</p>
+
+
+            </form>
+        </div>
+
+    </div>
+
+
+
+{% endblock %}

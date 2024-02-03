@@ -1,0 +1,58 @@
+{% extends "model-page.html"  %}
+
+{% block style%}
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+{% endblock%}
+
+{% block content %}
+    
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Assunto</th>
+        <th>Tipo</th>
+        <th>Setor</th>        
+        <th>Status</th>
+        <th>Autor</th>
+        <th>Atualizada em</th>
+        <th>Seguindo</th>
+      </tr>
+    </thead>
+    <tbody>
+
+            {% for demanda in demandas %}
+                
+              {% if demanda.listar %}
+
+                <tr class={{ demanda.cor }}>
+                    <td><a href="../demanda/{{demanda.id}}">{{ demanda.id }}</a></td>
+                    <td><a href="../demanda/{{demanda.id}}">{{ demanda.assunto }}</a></td>
+                    <td>{{ demanda.tipo }}</td>
+                    <td>{{ demanda.setor }}</td>
+                    <td>{{ demanda.status }}</td>
+                    <td>{{ demanda.mailusuario }}</td>
+                    <td>{{ demanda.dtatualizado }} </td>
+                    
+                    {% if demanda.seguindo == 'S' %}
+                      <td><a href="../demanda/{{demanda.id}}">Sim</a> </td>
+                    {% else %}
+                      <td><a href="../demanda/{{demanda.id}}">Não</a> </td>  
+                    {% endif %}
+                </tr>
+              
+              {% endif %} 
+                
+            {% endfor %} 
+            
+
+    </tbody>
+  </table>  
+
+{% endblock %}[]

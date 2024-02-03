@@ -1,0 +1,95 @@
+
+{% extends "model-page.html" %}
+
+{% block content  %} 
+
+    <h3 class="text-center">Registrar andamento demanda</h3> 
+    {% if ambiente.is_dev %}
+        <div class="acdediv text-center mt-2 mb-2">Acesso DEV</div>
+    {% endif %}    
+    
+     <form enctype="multipart/form-data" action="submit", method="POST">{% csrf_token %}
+        
+        <div class="container">
+            <input class="form-control" name="andamentoid" type="hidden" value="{{ andamento.id }}">
+            <input class="form-control" name="demandaid" type="hidden" value="{{ demanda.id }}">
+            <ul class="list-group my-4 mx-2">
+                <li class="list-group-item list-group-item-light"><b>Tipo:</b> {{ demanda.tipo }}</li>
+                <li class="list-group-item list-group-item-light"><b>Setor:</b> {{ demanda.setor }}</li>
+                <li class="list-group-item list-group-item-light"><b>Descrição:</b> {{ demanda.descricao }}</li>
+
+                <li class="list-group-item list-group-item-light">
+                    <div class="input-group mb-3">
+                        <span class="inputlabel input-group-text">Tipo Andamento</span> 
+                        <select class="form-select" onchange="showOptions(this)" id="tipo" name="tipo" value="{{andamento.tipo}}" required >
+                        {% if andamento is none %}
+                            <option value=""></option> 
+                        {% endif %}                         
+                        {% for tipo in tipos %}
+                                                        
+                            {% if tipo == andamento.tipo %}
+                                <option value="{{tipo.id}}" selected>{{tipo.nome}}</option>
+                            {% else %}
+                                 {% if ambiente.is_dev and tipo.tipo != 1 %}
+                                    <option value="{{tipo.id}}">{{tipo.nome}}</option>
+                                 {% endif %}
+                                 {% if not ambiente.is_dev and tipo.tipo > 0 %}
+                                    <option value="{{tipo.id}}">{{tipo.nome}}</option>
+                                 {% endif %}                                 
+                                
+                            {% endif %}    
+
+                        {% endfor %}                      
+                        </select>
+                    </div>
+                
+
+                    {% if ambiente.is_dev %}
+                        <div class="input-group mb-3">
+                            <span class="inputlabel input-group-text">Horas (99:59)</span>                         
+                            <input class="form-control txthora" name="hora" type="text" placeholder="00:00" pattern="[0-9]{2}:[0-5]{1}[0-9]{1}" value="{{ demanda.hora }}">
+                        </div>                            
+
+                        <div class="input-group mb-3">
+                            <span class="inputlabel input-group-text">Tipo Hora</span>                                
+                            <select class="form-select" onchange="showOptions(this)" id="tipo_hora" name="tipo_hora" value="{{andamento.tipo_hora}}">
+                                {% if andamento is none %}
+                                    <option value=""></option> 
+                                {% endif %}                         
+                                
+                                {% for tipohora in tiposh %}                                                                
+                                    {% if tipohora == andamento.tipo_hora %}
+                                        <option value="{{tipohora.id}}" selected>{{tipohora.nome}}</option>
+                                    {% else %}
+                                        <option value="{{tipohora.id}}">{{tipohora.nome}}</option>                                
+                                    {% endif %}    
+                                {% endfor %}                      
+                            </select>
+                        </div>
+
+                {% endif %}   
+                </li>
+                
+                <li class="list-group-item list-group-item-light text-center">
+                    <div class="form-group">
+                        
+                        <form action="" method="POST" class="formckandamento">
+                            {% csrf_token %}
+                            {{ form.media}}
+                            {{ form}}
+                        </form>
+
+                    </div>
+                </li>
+
+                <li class="list-group-item list-group-item-light text-center">
+                    <button class="btn btn-primary enviar_btn ml-10 mb-3" type="submit">
+                        Registrar
+                    </button>     
+                </li>                
+            </ul> 
+        </div>
+    </form>
+    
+
+{% endblock %}

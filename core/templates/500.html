@@ -1,0 +1,35 @@
+
+{% extends "model-page.html" %}
+    
+    {% block style  %}
+        <style>
+        #bottom 
+        {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+        .msg1
+        {
+            color: blue;
+            font-size: 300%;
+        }
+        .msg2
+        {
+           padding: 0 1rem .75rem;
+           color:#aaaaaa; 
+           font-weight:bold;  
+        }
+
+        </style>
+    {% endblock %}        
+
+    {% block content  %} 
+
+    <div class="container mt-3">
+        <p class="msg1">Ops! :(</p>
+        <p class="msg2">Alguma coisa não funcionou como deveria, já gravei um log aqui para verificarmos!</p>
+    </div>
+
+
+    {% endblock %}

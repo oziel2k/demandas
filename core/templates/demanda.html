@@ -1,0 +1,136 @@
+{% extends "model-page.html"  %}
+
+{% block content %}
+
+{% if ambiente.is_dev %}
+    <div class="acdediv text-center mt-2 mb-2">Acesso DEV</div>
+{% endif %}
+<div class="container">
+    <h3 class="text-center mt-2 mb-2">Detalhes da Demanda</h3>
+
+    <div class="container ml-0 mt-2 mb-1">
+
+        <div class="container text-end folow_div">
+            {% if usuario_demanda.status == 'S' %}
+                
+                <a href="/demandas/seguir/nao/{{demanda.id}}">                                        
+                    <button type="button" class="btn follow_btn btn-danger">Deixar de seguir</button>
+                </a>            
+            {% else %}                        
+                <a href="/demandas/seguir/sim/{{demanda.id}}">                                       
+                    <button type="button" class="btn follow_btn btn-success">Seguir</button>
+                </a>
+            {% endif %}  
+        </div>
+
+        <div class="contborder">
+            
+            <ul class="list-group">
+
+                <li class="list-group-item list-group-item-primary text-center"><b>Dados Básicos</b></li>
+                <li class="list-group-item list-group-item-secondary"><b>Assunto:</b> {{demanda.assunto }}</li>
+                <li class="list-group-item list-group-item-light"><b>Tipo:</b> {{demanda.tipo }}</li>
+                <li class="list-group-item list-group-item-light"><b>Setor:</b> {{demanda.setor }}</li>
+                <li class="list-group-item list-group-item-light"><b>Atualizada em:</b> {{demanda.dtatualizado }}</li>
+                <li class="list-group-item list-group-item-light"><b>Status:</b> {{demanda.status }}</li>
+                <li class="list-group-item list-group-item-light"><b>Criado por:</b> {{demanda.mailusuario }}</li>
+                <li class="list-group-item list-group-item-light"><b>Criado em:</b> {{demanda.dtgerado }}</li>
+                 {% if demanda.horas != '00:00' %}
+                    <li class="list-group-item list-group-item-light"><b>Consumo:</b> {{demanda.horas}}h</li>
+                {% endif %}   
+
+                <li class="list-group-item list-group-item-secondary"><b>Descrição:</b> {{demanda.descricao }}</li> 
+                
+            </ul>              
+
+        </div>
+
+        <div class="contborder mt-3">
+        
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-primary text-center"><b>Andamentos</b> </li>                
+            </ul>            
+            <br>
+           
+            {% for andamento in andamentos %}
+
+                <div class="container">
+                    <ul class="list-group">                    
+                        <li class="list-group-item list-group-item-light mb-0 mt-0">
+                            <div class="d-flex justify-content-between">
+                                <div class="p-2">
+                                     {% if andamento.hora is not None %}
+                                        <p class="{{andamento.tipo_hora.classe}}">{{andamento.tipo_hora}}: {{andamento.hora}}h</p>
+                                     {% endif %}
+                                    <span class="badge bg-secondary">{{ andamento.tipo }}</span>                                     
+
+                                </div>
+
+                                <div class="p-2">
+                                    Registrado em <b>{{ andamento.dtatualizado }}</b> por <b>{{ andamento.mailusuario }}</b>
+                                </div>
+
+                                <div class="p-2">
+                                    {% if ambiente.is_dev %}
+                                        
+                                        <a href="/andamento/item/{{andamento.id}}"> 
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-crop" viewBox="0 0 16 16">
+                                                <path d="M3.5.5A.5.5 0 0 1 4 1v13h13a.5.5 0 0 1 0 1h-2v2a.5.5 0 0 1-1 0v-2H3.5a.5.5 0 0 1-.5-.5V4H1a.5.5 0 0 1 0-1h2V1a.5.5 0 0 1 .5-.5zm2.5 3a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4H6.5a.5.5 0 0 1-.5-.5z"/>
+                                              </svg>
+                                        </a> 
+                                    {% endif %}    
+                                </div>
+                                
+                            </div>
+
+                        </li>
+                        <li class="list-group-item list-group-item-secondary"> {{ andamento.descricao|safe }} </li>                                    
+
+                        {% if andamento.tipo.id == 4 and andamento.tipo_hora.id == 4 %}
+                            <li class="list-group-item list-group-item list-group-item-warning"> 
+                                <a href="/demandas/acoes/retornarandamento/aprovado/{{andamento.id}}">                                       
+                                    <button type="button" class="btn btn-success">Aprovar</button>
+                                </a>
+                                <a href="/demandas/acoes/retornarandamento/rejeitado/{{andamento.id}}">
+                                    <button type="button" class="btn btn-danger">Rejeitar</button>
+                                </a>
+                                <a href="/demandas/acoes/retornarandamento/analise/{{andamento.id}}">                                      
+                                    <button type="button" class="btn btn-secondary">Em Análise</button>
+                                </a>
+                            </li>                                    
+                    
+                        {% endif %}       
+
+                    </ul>
+
+                </div>
+                <br>
+                
+            {% endfor %}     
+
+        </div>
+        
+        <div class="container mt-2 mb-2">
+            {% if demanda.cor != 'table-success'  %}
+
+                <a href="/andamento/registrar/?demandaid={{demanda.id}}">
+                    <button type="button" class="btn btn-primary mb-2">Registrar Andamento</button>
+                </a> 
+
+            {% endif %}
+
+            {# {% if request.user == demanda.usuario %}  #}
+            {% if ambiente.pode_alterar %}
+                
+                <a href="/demandas/registrar/?id={{demanda.id}}">
+                    <button type="button" class="btn btn-primary mb-2">Alterar Dados Básicos</button>
+                </a> 
+
+            {% endif %}
+        </div>
+    </div>
+
+    <br>
+    <br>
+</div>    
+{% endblock %}

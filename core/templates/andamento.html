@@ -1,0 +1,57 @@
+
+{% extends "model-page.html" %}
+
+{% block content  %} 
+
+    <h3 class="text-center">Edição Andamento</h3> 
+    {% if ambiente.is_dev %}
+        <div class="acdediv text-center mt-2 mb-2">Acesso DEV</div>
+    {% endif %}   
+    
+    {% if not andamento%}
+        <h5 class="text-center">O registro selecionado não existe mais</h5> 
+
+    {% else %}
+        
+        <div class="container">
+            <input class="form-control" name="andamentoid" type="hidden" value="{{ andamento.id }}">
+            <input class="form-control" name="demandaid" type="hidden" value="{{ demanda.id }}">
+            <ul class="list-group my-4 mx-2">
+                <li class="list-group-item list-group-item-light text-center"><b>Dados Demanda</b></li>
+                <li class="list-group-item list-group-item-light"><b>Tipo:</b> {{ demanda.tipo }}</li>
+                <li class="list-group-item list-group-item-light"><b>Setor:</b> {{ demanda.setor }}</li>
+                <li class="list-group-item list-group-item-light"><b>Descrição:</b> {{ demanda.descricao }}</li>
+            </ul> 
+
+            <ul class="list-group my-4 mx-2">
+                <li class="list-group-item list-group-item-light text-center">
+                    <div class="p-2">
+                        <b>Dados Andamento</b>
+                    </div>
+                    <div class="p-2">
+                        {% if ambiente.is_dev %}
+                            <a href="/andamento/apagar/{{andamento.id}}" class="text-right">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-x-square-fill" viewBox="0 0 16 16">
+                                    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"/>
+                                </svg>
+                            </a> 
+                        {% endif %}   
+                    </div>               
+                </li>
+                <li class="list-group-item list-group-item-light"><b>Data/hora:</b> {{ andamento.dtatualizado }}</li>
+                <li class="list-group-item list-group-item-light"><b>Tipo:</b> {{ andamento.tipo }}</li>
+                <li class="list-group-item list-group-item-light"><b>Usuário:</b> {{ andamento.usuario }}</li>
+                <li class="list-group-item list-group-item-light"><b>Descrição:</b> {{ andamento.descricao|safe }}</li>
+                {% if andamento.hora %}
+                    <li class="list-group-item list-group-item-light"><b>{{ andamento.tipo_hora }}</b> {{ andamento.hora }}</li>
+
+                {% endif %}  
+
+            </ul> 
+ 
+
+        </div>
+
+    {% endif %}   
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "model-page.html" %}
+
+{% block content  %} 
+    
+    <br>
+    <div class="titulo-t1 text-center">Consumo Pacote de Horas</div> 
+    <br>
+    <div class="titulo-t2 text-center">Selecione o período para consultar o consumo do pacote de horas</div>
+    <br>
+    
+     <form enctype="multipart/form-data" action="submit", method="POST">{% csrf_token %}
+      <input class="form-control" name="urlent" type="hidden" value="{{ urlent }}"> 
+        <div class="container">
+
+          <div class="input-group mb-3">
+              <span class="inputlabel input-group-text">Data inicial</span>
+              <input type="date" name="data_i" class="form-control" placeholder="dd/mm/yyyy" value="{{ambiente.datai}}" required>               
+            </div>
+
+            <div class="input-group mb-3">
+              <span class="inputlabel input-group-text">Data final</span>
+              <input type="date" name="data_f" class="form-control" placeholder="dd/mm/yyyy" value="{{ambiente.dataf}}" required>               
+            </div>
+
+            <div>
+                {% for message in messages %}
+                <div class="alert alert-danger">
+                    <strong> {{ message }} </strong> 
+                </div>
+                {% endfor %}
+              
+                <button class="btn btn-primary botaounico ml-10 mb-3" type="submit">
+                  Consultar
+                </button>
+            </div>            
+      
+        </div>
+    </form>
+
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends "model-page.html" %}
+
+{% block content  %} 
+    {% if ambiente.is_dev %}
+        <div class="acdediv text-center mt-2 mb-2">Acesso DEV</div>
+    {% endif %}
+
+    <h1 class="text-center">Cadastro de Demanda</h1> 
+    
+     <form enctype="multipart/form-data" action="submit", method="POST">{% csrf_token %}
+        
+        <div class="container">
+
+            <input class="form-control" name="demandaid" type="hidden" value="{{ demanda.id }}">
+
+            <div class="input-group mb-3">
+              <span class="inputlabel input-group-text">Assunto</span>
+              <input type="text" name="assunto" class="form-control" value="{{ demanda.assunto }}" required>               
+            </div>
+
+            <div class="input-group mb-3">
+                <span class="inputlabel input-group-text">Tipo</span>
+                <select class="form-select" onchange="showOptions(this)" id="tipo" name="tipo" value="{{ demanda.tipo }}" required >
+                
+                    {% if demanda is none %}
+                        <option value=""></option> 
+                    {% endif %} 
+    
+                    {% for tipo in tipos %}
+                        {% if tipo == demanda.tipo %}
+                            <option value="{{tipo.id}}" selected>{{tipo.nome}}</option>
+                        {% else %}
+                            <option value="{{tipo.id}}">{{tipo.nome}}</option>
+                        {% endif %}    
+                    {% endfor %}  
+                    </select>                
+            </div>            
+
+            <div class="input-group mb-3">
+                <span class="inputlabel input-group-text">Setor</span>                  
+               <select class="form-select" onchange="showOptions(this)" id="setor"  name="setor" value="{{ demanda.setor }}" required >
+                
+                {% if demanda is none %}
+                    <option value=""></option> 
+                {% endif %} 
+
+                {% for setor in setores %}
+                    {% if setor == demanda.setor %}
+                        <option value="{{setor.id}}" selected>{{ setor.nome}}</option>
+                    {% else %}
+                        <option value="{{setor.id}}">{{setor.nome}}</option>
+                    {% endif %}                    
+                {% endfor %}
+
+                </select>
+            </div>              
+
+            <div class="input-group mb-3">
+                <span class="inputlabel input-group-text">Descrição</span>
+                <textarea class="form-control" name="descricao" rows="8" required>{{ demanda.descricao }}</textarea>
+            </div> 
+
+            {% if demanda %}
+                <div class="input-group mb-3">
+                    <span class="inputlabel input-group-text">Status</span>                       
+                    <select class="form-select" onchange="showOptions(this)" id="status" 
+                                name="status" value="{{ demanda.status }}">
+                        {% for status in statuss %}                        
+                            {% if status == demanda.status %}
+                                <option value="{{status.id}}" selected>{{ status.nome}}</option>
+                            {% else %}
+                                <option value="{{status.id}}">{{ status.nome}}</option>
+                            {% endif %}
+                        {% endfor %}   
+                    </select>               
+                </div>                  
+            {% endif %}
+            
+            <div class="container text-center"> 
+                <button class="btn btn-primary enviar_btn mt-2" type="submit">
+                Registar
+                </button>              
+            </div>
+        </div>
+    </form>
+
+{% endblock %}

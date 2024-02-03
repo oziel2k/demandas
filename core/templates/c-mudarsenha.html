@@ -1,0 +1,58 @@
+{% extends "model-page.html"  %}
+
+{% block content %}
+
+    <div class="container">
+        
+        <form enctype="multipart/form-data" action="submit", method="POST" >
+            {% csrf_token %}
+            </br>
+            <!-- {{ form }}   !-->
+            <div class="container">
+
+
+                <div class="jumbotron text-center">
+                    <h3>Informe sua senha antiga e então informe sua nova senha duas vezes para que possamos verificar se você digitou tudo corretamente.</h3>
+                </div>
+
+                <div class="container" style="width: 250px;" >
+
+                    <div class="form-group">
+                        <label for="id_old_password">Senha atual:</label>
+                        <input  class="form-control" type="password" name="old_password" autocomplete="current-password" autofocus required id="id_old_password">
+                    </div>            
+                    <div class="form-group">
+                        <label for="id_new_password1">Nova senha:</label>
+                        <input  class="form-control" type="password" name="new_password1" autocomplete="new-password" required id="id_new_password1">
+                    </div>     
+                    <div class="form-group">
+                        <label for="id_new_password2">Nova senha:</label>
+                        <input  class="form-control" type="password" name="new_password2" autocomplete="new-password" required id="id_new_password2">
+                    </div>  
+                </div>
+
+                <span class="helptext">
+                    <ul>
+                        <li>Sua senha não deve ser muito parecida com o resto das suas informações pessoais.</li>
+                        <li>Sua senha precisa conter pelo menos 8 caracteres.</li>
+                        <li>Sua senha não deve ser uma senha comumente utilizada.</li>
+                    </ul>
+                </span>                 
+                </br>
+                </br>
+                <div class="container">
+                    {% for message in messages %}            
+                        <div class="alert alert-danger">
+                            <strong>{{ message }}</strong> 
+                        </div>            
+                    {% endfor %}
+                </div> 
+                <div class="container text-center">
+                    <button type="submit" class="btn btn-primary enviar_btn ml-10 mb-3" >Salvar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <br>
+{% endblock %}

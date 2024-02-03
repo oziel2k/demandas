@@ -1,0 +1,55 @@
+{% extends "model-page.html"  %}
+
+{% block content %}
+
+{% if ambiente.is_dev %}
+    <div class="acdediv text-center mt-2 mb-2">Acesso DEV</div>
+{% endif %}
+<div class="container">
+    <h3 class="text-center mt-2 mb-2">Consumo Horas do Pacote</h3>
+
+    <div class="container ml-0 mt-2 mb-1">
+
+        <div class="contborder mt-3">
+           
+            {% for andamento in andamentos %}
+
+                <div class="container">
+                    <ul class="list-group">   
+                        
+                        <li class="list-group-item list-group-item-light mb-0 mt-0">
+                            <a href="/demandas/demanda/{{andamento.demanda_id}}"><b>Demanda: </b> {{andamento.demanda_id}}</a></li>
+                        <li class="list-group-item list-group-item-secondary">{{ andamento.assunto }} </li>  
+                        <li class="list-group-item list-group-item-light mb-0 mt-0">
+                            <div class="d-flex justify-content-between">
+                                <div class="p-2">
+                                    <p class="{{andamento.tipo_hora.classe}}">{{andamento.tipo}}: {{andamento.hora}}h</p>
+                                </div>
+                                <div class="p-2">
+                                    <p> <b>Andamento: </b> {{andamento.id}}</p>
+                                </div>                                
+
+                                <div class="p-2">
+                                    Registrado em <b>{{ andamento.dtatualizado }}</b>
+                                </div>
+                                
+                            </div>
+
+                        </li>
+                        <li class="list-group-item list-group-item-secondary"><b>Descrição Serviço:</b> {{ andamento.descricao|safe }} </li>                                    
+
+                    </ul>
+
+                </div>
+                <br>
+                
+            {% endfor %}     
+
+        </div>
+
+    </div>
+
+    <br>
+    <br>
+</div>    
+{% endblock %}
