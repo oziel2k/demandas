@@ -467,3 +467,4 @@ def painel_dev(request):
         return render(request,'painel-dev.html', {'ambiente':ambiente})
     else:
         return redirect("/")    
+    
