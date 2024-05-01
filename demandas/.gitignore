@@ -3,3 +3,4 @@ settings.py
 requerements.txt
 config.py
 __pycache__
+*.pyc
