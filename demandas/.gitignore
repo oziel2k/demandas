@@ -2,3 +2,4 @@ settings.py
 *.sqlite3
 requerements.txt
 config.py
+__pycache__

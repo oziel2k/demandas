@@ -1,5 +1,5 @@
 """
-ASGI config for demandas2 project.
+ASGI config for demandas project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'demandas2.settings.config')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'demandas.settings.config')
 
 application = get_asgi_application()
