@@ -2,11 +2,6 @@ from pathlib import Path
 import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = ''
-
-DEBUG = True
-
-ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -62,6 +57,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'demandas2.urls'
+WSGI_APPLICATION = 'demandas2.wsgi.application'
 
 TEMPLATES = [
     {
@@ -79,20 +75,6 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'demandas2.wsgi.application'
-
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'nx',
-        'USER': 'ux',
-        'PASSWORD': 'px',
-        'HOST': 'localhost',
-        'PORT': 'xxxx',
-    }
-}
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -108,8 +90,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-
+# Internationalization
 LANGUAGE_CODE = 'pt-br'
 TIME_ZONE = 'America/Sao_Paulo'
 USE_I18N = True
@@ -117,7 +98,7 @@ USE_L10N = False
 USE_TZ = True
 DATETIME_FORMAT =  'd/m/Y H:i.s'
 
-# Static files (CSS, JavaScript, Images)
+# Static files 
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static/'
 
@@ -138,7 +119,6 @@ ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_SESSION_REMEMBER = True
-
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_TEMPLATE_PACK = 'uni_form'

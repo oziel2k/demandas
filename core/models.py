@@ -1,5 +1,5 @@
 from django.db.models.deletion import CASCADE
-from demandas2.settings import AUTH_PASSWORD_VALIDATORS
+from demandas2.settings.config import AUTH_PASSWORD_VALIDATORS
 from django.db import models
 from django.db.models.fields.related import ForeignObject
 from django.contrib.auth.models import User
