@@ -4,3 +4,4 @@ requerements.txt
 config.py
 __pycache__
 *.pyc
+**/__pycache__/
